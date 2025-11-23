@@ -11,6 +11,7 @@ Function Run-Scripts {
     if (Test-Path $Dir) {
         Write-Host "Running scripts in $Dir..."
         Get-ChildItem $Dir -Filter *.ps1 | ForEach-Object {
+            Write-Host "----------------------------------------"
             Write-Host "Executing $($_.Name)..."
             & $_.FullName
         }
