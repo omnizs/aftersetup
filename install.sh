@@ -11,11 +11,15 @@ run_scripts() {
     local dir="$1"
     if [ -d "$dir" ]; then
         echo "Running scripts in $dir..."
+        shopt -s nullglob
         for script in "$dir"/*; do
+            shopt -u nullglob
             if [ -f "$script" ] && [ -x "$script" ]; then
+                echo "----------------------------------------"
                 echo "Executing $script..."
                 "$script"
             elif [ -f "$script" ] && [[ "$script" == *.sh ]]; then
+                echo "----------------------------------------"
                 echo "Sourcing $script..."
                 . "$script"
             elif [ -f "$script" ]; then
